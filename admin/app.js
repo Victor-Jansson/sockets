@@ -4,7 +4,7 @@ define('app', [
 		'node_modules/lodash/lodash.js'
 	], function(ko, io, _) {
 		var socket = io.connect('http://localhost:3000');
-		
+
 		socket.on('users changed', function(clients) {
 			model.users([]);
 
@@ -16,6 +16,10 @@ define('app', [
 
 		var model = {
 			users: ko.observableArray([])
+		}
+
+		userClick = function(id) {
+			socket.emit('user info', id);
 		}
 
 	ko.applyBindings(model);
